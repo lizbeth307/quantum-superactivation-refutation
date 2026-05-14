@@ -1,5 +1,7 @@
 # ⚛️ QuantumNEAT & QuantumOS — Computational Refutation of Quantum Superactivation
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20189708.svg)](https://doi.org/10.5281/zenodo.20189708)
+
 > **A rigorous computational disproof of the Smith-Yard (2008) superactivation hypothesis using exact Stinespring purifications and hybrid AI simulation.**
 
 ## 🏆 Key Results
@@ -48,10 +50,13 @@ python QuantumOS/ui/quantum_os.py
 ## 📖 Citation
 
 ```bibtex
-@article{murai2026refutation,
-  title={Computational Refutation of Quantum Superactivation via Bound Entanglement in Low Dimensions},
-  author={Yaroslav, Murai},
-  journal={arXiv preprint},
-  year={2026}
+@misc{murai_2026_20189708,
+  author       = {Murai, Yaroslav},
+  title        = {Computational Refutation of Quantum Superactivation via Bound Entanglement in Low Dimensions},
+  month        = may,
+  year         = 2026,
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.20189708},
+  url          = {https://doi.org/10.5281/zenodo.20189708}
 }
 ```
