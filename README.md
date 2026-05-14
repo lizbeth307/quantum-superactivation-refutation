@@ -42,7 +42,7 @@ python kdw_hunt.py
 ### 2. The $N=15$ Macroscopic Joint Channel Attack
 To run the 30-qubit SPSA simulation with classical erasure flags:
 ```bash
-python ui/quantum_os.py
+python QuantumOS/ui/quantum_os.py
 ```
 
 ## 📖 Citation
