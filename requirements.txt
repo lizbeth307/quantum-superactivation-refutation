@@ -1,0 +1,8 @@
+torch>=2.0.0
+pennylane>=0.34.0
+qiskit>=1.0.0
+qiskit-aer>=0.14.0
+plotext>=5.2.8
+rich>=13.7.0
+numpy>=1.24.0
+scipy>=1.11.0
