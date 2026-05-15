@@ -27,39 +27,44 @@ By analyzing the decay structure of the Hilbert space dimensions ($d=0$ to $d=16
 
 *(For full details, read [paper_pipeline/RESEARCH_REPORT.md](paper_pipeline/RESEARCH_REPORT.md))*
 
-## 📁 Repository Structure & Clutter Warning
+## 📁 Repository Structure
 
-*Note: This repository contains numerous `test_*.py` and `fix_*.py` files generated during the active R&D phase. You can safely ignore them. The core entry points are listed below.*
+We have cleanly separated the two major discoveries into their respective directories. All legacy R&D testing scripts have been moved to an archive folder.
 
 ```text
-├── QuantumApp/            # Core Quantum Machine Learning simulations
-│   ├── sa_full_PA_cq.py   # Main AI Optimization loop for Superactivation
-│   ├── compare_cmb.py     # Script proving the 16D Cosmic Microwave Background symmetry
-│   └── cmb_pysr.py        # Symbolic regression for the CMB pattern
-├── kdw_hunt.py            # Exact d=4x4 global optimization analytical script
-├── paper_pipeline/        # Formal reports and LaTeX manuscripts
-│   └── RESEARCH_REPORT.md # Detailed breakdown of the CMB Fractal Symmetry
-└── QuantumOS/             # Associated module for N=15 AI attack
+├── 01_Superactivation_Refutation/   # The core Quantum Machine Learning simulations
+│   ├── sa_full_PA_cq.py             # Main AI Optimization loop for Superactivation
+│   ├── kdw_hunt.py                  # Exact d=4x4 global optimization analytical script
+│   └── QuantumOS/                   # Associated module for N=15 AI attack
+├── 02_Cosmological_Symmetry/        # The CMB Fractal Symmetry extraction
+│   ├── compare_cmb.py               # Script proving the 16D Cosmic Microwave Background symmetry
+│   ├── cmb_pysr.py                  # Symbolic regression for the CMB pattern
+│   ├── visualize_calabi_yau.py      # Generates the dimension decay plot
+│   └── calabi_yau_decay.png         # The output visualization
+├── paper_pipeline/                  # Formal reports and LaTeX manuscripts
+│   ├── paper_draft.tex              # The main arXiv submission LaTeX
+│   └── RESEARCH_REPORT.md           # Detailed breakdown of the CMB Fractal Symmetry
+└── _legacy_experiments/             # (Archive) Intermediate testing and raw data files
 ```
 
 ## 🚀 How to Run
 
-### 1. The $N=15$ Joint Channel Attack & Superactivation Refutation
+### 1. The Superactivation Refutation (AI Joint Channel Attack)
 To run the primary AI optimization loop that disproves superactivation:
 ```bash
-python QuantumApp/sa_full_PA_cq.py
+python 01_Superactivation_Refutation/sa_full_PA_cq.py
 ```
 
 ### 2. Verify the Cosmic Microwave Background (CMB) Fractal Symmetry
 To see the exact 16-dimensional correlation table linking the quantum decay to the CMB:
 ```bash
-python QuantumApp/compare_cmb.py
+python 02_Cosmological_Symmetry/compare_cmb.py
 ```
 
 ### 3. Exact Analytical Bound ($d=4 \times 4$)
 To reproduce the $-0.68$ bound using LAPACK purifications:
 ```bash
-python kdw_hunt.py
+python 01_Superactivation_Refutation/kdw_hunt.py
 ```
 
 ## 📖 Citation

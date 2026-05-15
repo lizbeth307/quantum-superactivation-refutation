@@ -127,26 +127,35 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
                 
             optimizer.zero_grad()
             
-            K_PPT = torch.complex(K_PPT_real, K_PPT_imag)
-            
-            K_PPT_TP, sum_K_K_raw = project_to_trace_preserving(K_PPT, d, device)
-            
-            K_Noise = K_Era if K_Era is not None else K_PPT_TP
-            
             if objective == "additivity_violation":
-                # The Holy Grail: Q(N x N). We don't use PPT channel. We test two identical noise channels.
+                # Skip K_PPT entirely to save massive amounts of memory and prevent TDR crash
+                K_Noise = K_Era
                 if topology == "tripartite":
                     Ks_part = batch_kron(K_Noise, K_Noise)
                     Ks = batch_kron(Ks_part, K_Noise)
                 else:
                     Ks = batch_kron(K_Noise, K_Noise)
+                npt_penalty = torch.tensor(0.0, device=device)
+                tp_penalty = torch.tensor(0.0, device=device)
+                K_PPT_TP = None
             else:
+                K_PPT = torch.complex(K_PPT_real, K_PPT_imag)
+                K_PPT_TP, sum_K_K_raw = project_to_trace_preserving(K_PPT, d, device)
+                K_Noise = K_Era if K_Era is not None else K_PPT_TP
+                
                 if topology == "tripartite":
                     Ks_part = batch_kron(K_Noise, K_PPT_TP)
                     Ks = batch_kron(Ks_part, K_PPT_TP)
                 else:
                     Ks = batch_kron(K_Noise, K_PPT_TP)
-                    
+                
+                npt_penalty = evaluate_npt_penalty(K_PPT_TP, d*d, d)
+                
+                sum_K_K_TP = torch.zeros((d, d), dtype=torch.complex128, device=device)
+                for k in range(num_PPT):
+                    sum_K_K_TP += K_PPT_TP[k].conj().T @ K_PPT_TP[k]
+                tp_penalty = torch.norm(sum_K_K_TP - torch.eye(d, device=device))
+                
             if use_ancilla:
                 # To use an Ancilla, we tensor the channel with an Identity channel of dimension d.
                 # This allows the AI to encode into a larger space A x Ancilla.
@@ -167,14 +176,6 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
             else:
                 Ic = evaluate_stinespring_capacity(Ks, T_in_norm)
             
-            npt_penalty = evaluate_npt_penalty(K_PPT_TP, d*d, d)
-            
-            # Calculate the real difference for telemetry
-            sum_K_K_TP = torch.zeros((d, d), dtype=torch.complex128, device=device)
-            for k in range(num_PPT):
-                sum_K_K_TP += K_PPT_TP[k].conj().T @ K_PPT_TP[k]
-            tp_penalty = torch.norm(sum_K_K_TP - torch.eye(d, device=device))
-            
             # Calculate Energy Penalty
             # T_in_norm has shape (dim_in_state, rank_in)
             T_tensor = T_in_norm.reshape(d, T_in_norm.shape[0] // d, T_in_norm.shape[1])
@@ -192,7 +193,7 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
             # Use MASSIVE penalties to strictly enforce physics laws
             loss = -Ic + 1000000.0 * npt_penalty + 100000.0 * tp_penalty + 100.0 * energy_penalty
             loss.backward()
-            if torch.isnan(K_PPT_real.grad).any():
+            if K_PPT_real.grad is not None and torch.isnan(K_PPT_real.grad).any():
                 print(f"CRITICAL: K_PPT_real.grad contains NaN at epoch {epoch}!")
             optimizer.step()
             
@@ -203,7 +204,7 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
                 
                 # Save the absolute best matrices for rigorous verification
                 torch.save({
-                    'K_PPT': K_PPT_TP.detach(),
+                    'K_PPT': K_PPT_TP.detach() if K_PPT_TP is not None else None,
                     'T_in': T_in_norm.detach(),
                     'Ic': Ic.item(),
                     'npt_penalty': npt_penalty.item(),

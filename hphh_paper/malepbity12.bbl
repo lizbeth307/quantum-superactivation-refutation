@@ -1,0 +1,184 @@
+\begin{thebibliography}{19}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\expandafter\ifx\csname bibnamefont\endcsname\relax
+  \def\bibnamefont#1{#1}\fi
+\expandafter\ifx\csname bibfnamefont\endcsname\relax
+  \def\bibfnamefont#1{#1}\fi
+\expandafter\ifx\csname citenamefont\endcsname\relax
+  \def\citenamefont#1{#1}\fi
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\providecommand{\bibinfo}[2]{#2}
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{\citenamefont{Bouwmeester et~al.}(2000)\citenamefont{Bouwmeester,
+  Ekert, and Zeilinger}}]{BouwmeesterEZ-book}
+\bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Bouwmeester}},
+  \bibinfo{author}{\bibfnamefont{A.~K.} \bibnamefont{Ekert}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Zeilinger}},
+  \emph{\bibinfo{title}{The physics of quantum information : quantum
+  cryptography, quantum teleportation, quantum computation}}
+  (\bibinfo{publisher}{Springer, New York}, \bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Nielsen and Chuang}(2000)}]{Nielsen-Chuang}
+\bibinfo{author}{\bibfnamefont{M.~A.} \bibnamefont{Nielsen}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{I.~L.} \bibnamefont{Chuang}},
+  \emph{\bibinfo{title}{Quantum Computation and Quantum Information}}
+  (\bibinfo{publisher}{Cambridge University Press,Cambridge},
+  \bibinfo{year}{2000}).
+
+\bibitem[{\citenamefont{Alber et~al.}(2001)\citenamefont{Alber, Beth,
+  Horodecki, Horodecki, Horodecki, Rotteler, Weinfurter, Werner, and
+  Zeilinger}}]{Alber2001}
+\bibinfo{author}{\bibfnamefont{G.}~\bibnamefont{Alber}},
+  \bibinfo{author}{\bibfnamefont{T.}~\bibnamefont{Beth}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Rotteler}},
+  \bibinfo{author}{\bibfnamefont{H.}~\bibnamefont{Weinfurter}},
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Werner}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Zeilinger}},
+  \emph{\bibinfo{title}{Quantum Information: An Introduction to Basic
+  Theoretical Concepts and Experiments}} (\bibinfo{publisher}{Springer},
+  \bibinfo{year}{2001}).
+
+\bibitem[{\citenamefont{Gruska}(1999)}]{Gruska}
+\bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Gruska}},
+  \emph{\bibinfo{title}{Quantum Computing}} (\bibinfo{publisher}{McGraw-Hill,
+  London}, \bibinfo{year}{1999}).
+
+\bibitem[{\citenamefont{Bennett and Brassard}(1984)}]{BB84}
+\bibinfo{author}{\bibfnamefont{C.~H.} \bibnamefont{Bennett}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{G.}~\bibnamefont{Brassard}}, in
+  \emph{\bibinfo{booktitle}{Proceedings of the IEEE International Conference on
+  Computers, Systems and Signal Processing}} (\bibinfo{publisher}{IEEE Computer
+  Society Press, New York}, \bibinfo{address}{Bangalore, India, December 1984},
+  \bibinfo{year}{1984}), pp. \bibinfo{pages}{175--179}.
+
+\bibitem[{\citenamefont{Ekert}(1991)}]{Ekert91}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Ekert}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{67}},
+  \bibinfo{pages}{661} (\bibinfo{year}{1991}).
+
+\bibitem[{\citenamefont{Shor and Preskill}(2000)}]{Shor-Preskill}
+\bibinfo{author}{\bibfnamefont{P.~W.} \bibnamefont{Shor}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Preskill}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{85}},
+  \bibinfo{pages}{441} (\bibinfo{year}{2000}), \eprint{quant-ph/0003004}.
+
+\bibitem[{\citenamefont{Deutsch et~al.}(1996)\citenamefont{Deutsch, Ekert,
+  Jozsa, Macchiavello, Popescu, and Sanpera}}]{QPA}
+\bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Deutsch}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Ekert}},
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Jozsa}},
+  \bibinfo{author}{\bibfnamefont{C.}~\bibnamefont{Macchiavello}},
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Popescu}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Sanpera}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{77}},
+  \bibinfo{pages}{2818} (\bibinfo{year}{1996}), \eprint{quant-ph/9604039}.
+
+\bibitem[{\citenamefont{Bennett
+  et~al.}(1997{\natexlab{a}})\citenamefont{Bennett, Brassard, Popescu,
+  Schumacher, Smolin, and Wootters}}]{BBPSSW1996}
+\bibinfo{author}{\bibfnamefont{C.~H.} \bibnamefont{Bennett}},
+  \bibinfo{author}{\bibfnamefont{G.}~\bibnamefont{Brassard}},
+  \bibinfo{author}{\bibfnamefont{S.}~\bibnamefont{Popescu}},
+  \bibinfo{author}{\bibfnamefont{B.}~\bibnamefont{Schumacher}},
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Smolin}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.~K.} \bibnamefont{Wootters}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{78}},
+  \bibinfo{pages}{2031} (\bibinfo{year}{1997}{\natexlab{a}}),
+  \eprint{quant-ph/9511027}.
+
+\bibitem[{\citenamefont{Horodecki
+  et~al.}(2005{\natexlab{a}})\citenamefont{Horodecki, Horodecki, Horodecki, and
+  Oppenheim}}]{pptkey}
+\bibinfo{author}{\bibfnamefont{K.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Horodecki}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Oppenheim}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{94}},
+  \bibinfo{pages}{160502} (\bibinfo{year}{2005}{\natexlab{a}}),
+  \eprint{quant-ph/0309110}.
+
+\bibitem[{\citenamefont{Horodecki et~al.}()\citenamefont{Horodecki, Horodecki,
+  Horodecki, and Oppenheim}}]{keyhuge}
+\bibinfo{author}{\bibfnamefont{K.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Horodecki}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Oppenheim}},
+  \eprint{quant-ph/0506189}.
+
+\bibitem[{\citenamefont{Horodecki et~al.}(1998)\citenamefont{Horodecki,
+  Horodecki, and Horodecki}}]{bound}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Horodecki}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{R.}~\bibnamefont{Horodecki}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{80}},
+  \bibinfo{pages}{5239} (\bibinfo{year}{1998}), \eprint{quant-ph/9801069}.
+
+\bibitem[{\citenamefont{Devetak and Winter}(2003)}]{DevetakWinter-hash}
+\bibinfo{author}{\bibfnamefont{I.}~\bibnamefont{Devetak}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Winter}}
+  (\bibinfo{year}{2003}), \eprint{quant-ph/0306078}.
+
+\bibitem[{\citenamefont{Peres}(1996)}]{Peres96}
+\bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Peres}},
+  \bibinfo{journal}{Phys. Rev. Lett.} \textbf{\bibinfo{volume}{77}},
+  \bibinfo{pages}{1413} (\bibinfo{year}{1996}).
+
+\bibitem[{\citenamefont{Curty et~al.}(2004)\citenamefont{Curty, Lewenstein, and
+  L{\"{u}}tkenhaus}}]{Curty04:key-ent}
+\bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Curty}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Lewenstein}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{N.}~\bibnamefont{L{\"{u}}tkenhaus}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{92}},
+  \bibinfo{pages}{217903} (\bibinfo{year}{2004}), \eprint{quant-ph/0307151}.
+
+\bibitem[{\citenamefont{Horodecki
+  et~al.}(2005{\natexlab{b}})\citenamefont{Horodecki, Horodecki, Horodecki, and
+  Oppenheim}}]{lock-ent}
+\bibinfo{author}{\bibfnamefont{K.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Horodecki}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Horodecki}},
+  \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Oppenheim}},
+  \bibinfo{journal}{Phys. Rev. Lett} \textbf{\bibinfo{volume}{94}},
+  \bibinfo{pages}{200501} (\bibinfo{year}{2005}{\natexlab{b}}).
+
+\bibitem[{\citenamefont{Bennett
+  et~al.}(1997{\natexlab{b}})\citenamefont{Bennett, DiVincenzo, Smolin, and
+  Wootters}}]{BDSW1996}
+\bibinfo{author}{\bibfnamefont{C.~H.} \bibnamefont{Bennett}},
+  \bibinfo{author}{\bibfnamefont{D.~P.} \bibnamefont{DiVincenzo}},
+  \bibinfo{author}{\bibfnamefont{J.}~\bibnamefont{Smolin}}, \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{W.~K.} \bibnamefont{Wootters}},
+  \bibinfo{journal}{Phys. Rev. A} \textbf{\bibinfo{volume}{54}},
+  \bibinfo{pages}{3824} (\bibinfo{year}{1997}{\natexlab{b}}),
+  \eprint{quant-ph/9604024}.
+
+\bibitem[{\citenamefont{Guehne et~al.}(2003)\citenamefont{Guehne, Hyllus,
+  Bruss, Ekert, Lewenstein, Macchiavello, and Sanpera}}]{opt-local-decomp}
+\bibinfo{author}{\bibfnamefont{O.}~\bibnamefont{Guehne}},
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Hyllus}},
+  \bibinfo{author}{\bibfnamefont{D.}~\bibnamefont{Bruss}},
+  \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Ekert}},
+  \bibinfo{author}{\bibfnamefont{M.}~\bibnamefont{Lewenstein}},
+  \bibinfo{author}{\bibfnamefont{C.}~\bibnamefont{Macchiavello}},
+  \bibnamefont{and} \bibinfo{author}{\bibfnamefont{A.}~\bibnamefont{Sanpera}},
+  \bibinfo{journal}{JMO} \textbf{\bibinfo{volume}{50 (6-7)}},
+  \bibinfo{pages}{1079} (\bibinfo{year}{2003}), \eprint{quant-ph/0210134}.
+
+\bibitem[{\citenamefont{Guehne and Hyllus}(2003)}]{opt-multi-local-decomp}
+\bibinfo{author}{\bibfnamefont{O.}~\bibnamefont{Guehne}} \bibnamefont{and}
+  \bibinfo{author}{\bibfnamefont{P.}~\bibnamefont{Hyllus}},
+  \bibinfo{journal}{Int. J.Theor.Phys.} \textbf{\bibinfo{volume}{42}},
+  \bibinfo{pages}{1001} (\bibinfo{year}{2003}), \eprint{quant-ph/0301162}.
+
+\end{thebibliography}

@@ -51,9 +51,13 @@ def run_pysr():
     model.fit(X_train, y_train)
     
     print("\n" + "="*50)
-    print("🎯 PySR EXTRACTION COMPLETE!")
+    print("PySR EXTRACTION COMPLETE!")
     print("Best algebraic formula for the DFS Probability Distribution:")
     print(f"P(n) = {model.sympy()}")
+    
+    # Save formula to file for easy access
+    with open("discoveries/latest_formula.txt", "w") as f:
+        f.write(str(model.sympy()))
     print("="*50 + "\n")
 
 if __name__ == "__main__":

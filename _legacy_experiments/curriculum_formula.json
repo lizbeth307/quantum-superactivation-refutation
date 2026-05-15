@@ -1,0 +1,11 @@
+{
+  "equation": "(private_proxy - -0.07614359) * private_proxy",
+  "r2": 0.9988408361,
+  "features": [
+    "deg_gap",
+    "eig_4",
+    "private_proxy",
+    "compl_entropy",
+    "block_asymmetry"
+  ]
+}
