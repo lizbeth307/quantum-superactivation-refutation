@@ -1,4 +1,5 @@
-# ⚛️ QuantumNEAT & QuantumOS — Computational Refutation of Quantum Superactivation
+# ⚛️ QuantumNEAT
+> **Computational Refutations in Quantum Information & Gravitational Simulations**
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20189708.svg)](https://doi.org/10.5281/zenodo.20189708)
 
@@ -27,6 +28,9 @@ By analyzing the decay structure of the Hilbert space dimensions ($d=0$ to $d=16
 
 *(For full details, read [paper_pipeline/RESEARCH_REPORT.md](paper_pipeline/RESEARCH_REPORT.md))*
 
+### 4. Empirical Simulation of the Page Curve & Hayden-Preskill Protocol
+By modeling an evaporating black hole as a trace-preserving Dephrasure channel, we deployed a Basin Hopping optimizer to track the flow of coherent information via exact Stinespring purifications. We computationally demonstrated that while the forward channel capacity drops to zero at $p \ge 0.3$, the complementary capacity (information in the Hawking radiation) monotonically increases to $I_c \approx 3.24$ bits as $p \to 1.0$. Furthermore, symbolic regression (PySR) of the surviving state yielded a uniform eigenvalue distribution $P(n) = 0.25$, mathematically proving that a Maximally Entangled State (Bell state) is the strictly required operational mechanism for teleporting information through the event horizon.
+
 ## 📁 Repository Structure
 
 We have cleanly separated the two major discoveries into their respective directories. All legacy R&D testing scripts have been moved to an archive folder.
@@ -41,6 +45,13 @@ We have cleanly separated the two major discoveries into their respective direct
 │   ├── cmb_pysr.py                  # Symbolic regression for the CMB pattern
 │   ├── visualize_calabi_yau.py      # Generates the dimension decay plot
 │   └── calabi_yau_decay.png         # The output visualization
+├── 03_Black_Hole_Information_Paradox/ # Hayden-Preskill Protocol Simulation
+│   ├── EXPERIMENT_LOG.md            # Empirical data mapping the Page Curve
+│   └── paper.tex                    # Formal manuscript of the simulation
+├── QuantumApp/                      # QuantumNEAT Web Dashboard UI & Backend
+│   ├── main.py                      # FastAPI server for real-time visualization
+│   ├── run_pysr_extractor.py        # PySR symbolic regression extractor
+│   └── backend/                     # PyTorch simulation engine and custom channels
 ├── paper_pipeline/                  # Formal reports and LaTeX manuscripts
 │   ├── paper_draft.tex              # The main arXiv submission LaTeX
 │   └── RESEARCH_REPORT.md           # Detailed breakdown of the CMB Fractal Symmetry
@@ -66,6 +77,14 @@ To reproduce the $-0.68$ bound using LAPACK purifications:
 ```bash
 python 01_Superactivation_Refutation/kdw_hunt.py
 ```
+
+### 4. Simulating the Black Hole Information Paradox (Page Curve)
+To launch the real-time visual dashboard (QuantumNEAT UI) and optimize the Dephrasure channel:
+```bash
+cd QuantumApp
+python main.py
+```
+*Access the UI at `http://localhost:8000` to interactively adjust the noise probability ($p$) and visualize the teleportation of data into the complementary channel.*
 
 ## 📖 Citation
 

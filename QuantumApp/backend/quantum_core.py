@@ -62,6 +62,36 @@ def evaluate_stinespring_capacity(Ks, T_in_norm, device):
     Ic = S_B - S_E
     return Ic
 
+def evaluate_complementary_capacity(Ks, T_in_norm, device):
+    """
+    Evaluates the Coherent Information of the Complementary Channel.
+    If the forward channel represents a Black Hole, the complementary channel 
+    represents the Hawking radiation (the Environment).
+    I_c(Env) = S_E - S_B
+    """
+    W_tensor = torch.einsum('kij, jr -> kir', Ks, T_in_norm)
+    
+    # B Output State (The Black Hole remnant)
+    W_B = W_tensor.permute(0, 2, 1).reshape(Ks.shape[0] * T_in_norm.shape[1], Ks.shape[1])
+    rho_B = W_B.conj().T @ W_B
+    rho_B = (rho_B + rho_B.conj().T) / 2.0
+    rho_B = rho_B + torch.eye(rho_B.shape[0], dtype=torch.complex128, device=device) * 1e-8
+    ev_B = torch.linalg.eigvalsh(rho_B)
+    ev_B = ev_B[ev_B > 1e-12]
+    S_B = -torch.sum(ev_B * torch.log2(ev_B))
+    
+    # Environment State (Hawking Radiation)
+    W_E = W_tensor.reshape(Ks.shape[0], Ks.shape[1] * T_in_norm.shape[1])
+    rho_E = W_E @ W_E.conj().T
+    rho_E = (rho_E + rho_E.conj().T) / 2.0
+    rho_E = rho_E + torch.eye(rho_E.shape[0], dtype=torch.complex128, device=device) * 1e-8
+    ev_E = torch.linalg.eigvalsh(rho_E)
+    ev_E = ev_E[ev_E > 1e-12]
+    S_E = -torch.sum(ev_E * torch.log2(ev_E))
+    
+    Ic_env = S_E - S_B
+    return Ic_env
+
 def evaluate_metrology_distance(Ks, T_in_norm, d, device):
     """
     Evaluates the metrological utility of the channel by calculating the distinguishability

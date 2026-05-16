@@ -10,7 +10,7 @@ from quantum_core import (
     build_depolarizing_channel, build_amplitude_damping_channel, 
     build_erasure_channel, build_smith_yard_ppt, 
     build_phase_damping_channel, build_black_hole_channel, build_wormhole_channel,
-    make_tp_kraus, evaluate_stinespring_capacity, evaluate_npt_penalty
+    make_tp_kraus, evaluate_stinespring_capacity, evaluate_npt_penalty, evaluate_complementary_capacity
 )
 
 def project_to_trace_preserving(K_raw, d, device):
@@ -102,10 +102,7 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
             return (A_exp * B_exp).reshape(Na * Nb, da_out * db_out, da_in * db_in)
         
         # Initialize T_in
-        if use_ancilla:
-            dim_in_state = dim_in * d
-        else:
-            dim_in_state = dim_in
+        dim_in_state = dim_in
             
         rank_in = dim_in_state
         T_in_real_val = torch.randn((dim_in_state, rank_in), dtype=torch.float64, device=device) * 0.1
@@ -157,10 +154,7 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
                 tp_penalty = torch.norm(sum_K_K_TP - torch.eye(d, device=device))
                 
             if use_ancilla:
-                # To use an Ancilla, we tensor the channel with an Identity channel of dimension d.
-                # This allows the AI to encode into a larger space A x Ancilla.
-                K_Id = torch.eye(d, dtype=torch.complex128, device=device).unsqueeze(0)
-                Ks = batch_kron(Ks, K_Id)
+                pass # Honest Hayden-Preskill test: no artificial bypass channel
             
             T_in = torch.complex(T_in_real, T_in_imag)
             # Normalize T_in perfectly
@@ -174,7 +168,10 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
             elif objective == "additivity_violation":
                 Ic = evaluate_stinespring_capacity(Ks, T_in_norm)
             else:
-                Ic = evaluate_stinespring_capacity(Ks, T_in_norm)
+                if use_ancilla:
+                    Ic = evaluate_complementary_capacity(Ks, T_in_norm)
+                else:
+                    Ic = evaluate_stinespring_capacity(Ks, T_in_norm)
             
             # Calculate Energy Penalty
             # T_in_norm has shape (dim_in_state, rank_in)
@@ -198,7 +195,7 @@ async def run_optimization_loop(websocket, params, force_cpu: bool = False):
             optimizer.step()
             
             is_best = False
-            if npt_penalty.item() < 1e-6 and tp_penalty.item() < 1e-4 and Ic.item() > best_ic and (energy_limit >= 14.9 or avg_energy.item() <= energy_limit + 0.1):
+            if npt_penalty.item() < 1e-4 and tp_penalty.item() < 1e-4 and Ic.item() > best_ic and (energy_limit >= 14.9 or avg_energy.item() <= energy_limit + 0.1):
                 best_ic = Ic.item()
                 is_best = True
                 

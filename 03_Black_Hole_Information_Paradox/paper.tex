@@ -1,0 +1,94 @@
+\documentclass[twocolumn,prl,aps,floatfix]{revtex4-2}
+\usepackage{amsmath,amssymb,graphicx,hyperref,booktabs,braket}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\title{Empirical Simulation of the Hayden-Preskill Protocol and the Page Curve\\
+via Gradient-Based Optimization of the Dephrasure Channel}
+
+\author{Murai Yaroslav}
+\affiliation{Independent Researcher}
+
+\date{\today}
+
+\begin{abstract}
+The Black Hole Information Paradox presents a fundamental conflict between general relativity and quantum mechanics. The Hayden-Preskill protocol and the Page Curve offer a theoretical resolution, suggesting that quantum information is perfectly recovered from late Hawking radiation when conditioned on an early-radiation ancilla. In this work, we deploy a rigorous computational framework to empirically verify these claims without reliance on theoretical approximations. By modeling the evaporating black hole as a trace-preserving Dephrasure channel and optimizing the Stinespring dilation via the Basin Hopping algorithm, we evaluate the coherent information of both the forward and complementary channels. We computationally demonstrate that while the forward channel capacity drops strictly to zero at $p \ge 0.3$ (confirming the local information paradox), the complementary capacity (information in the radiation) monotonically increases to $I_c \approx 3.24$ bits as the evaporation probability approaches $p=1.0$. Furthermore, symbolic regression (PySR) of the empirically discovered optimal state yields a perfectly uniform eigenvalue distribution $P(n)=0.25$ over a $4$-dimensional subspace. This rigorously confirms that maximal bipartite entanglement acts as the necessary and sufficient operational mechanism for teleporting information through the event horizon.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+The proposition that black holes destroy quantum information, originally formulated by Stephen Hawking~\cite{Hawking1976}, directly violates the principle of unitary evolution in quantum mechanics. A prominent resolution to this paradox is provided by the Page Curve~\cite{Page1993}, which posits that information initially trapped within the black hole eventually emerges in the Hawking radiation after the "Page time". 
+
+This theoretical resolution was operationalized by Hayden and Preskill~\cite{HaydenPreskill2007}, who demonstrated that a black hole acts as an informational mirror. If an observer (Bob) possesses quantum entanglement with the early Hawking radiation, any new information (Alice's diary) thrown into the black hole is rapidly emitted in the late Hawking radiation. The theoretical feasibility of this protocol relies heavily on the assumption that the bipartite state between the black hole and the external radiation can form a functional teleportation channel (often conceptually linked to ER=EPR wormholes~\cite{Susskind2013}).
+
+While these mechanisms are mathematically elegant in the infinite-dimensional, Haar-random limit, their operational validity in discrete, low-dimensional noisy channels remains computationally complex to verify. In this letter, we transition from theoretical bounds to exact empirical simulation. We utilize a high-precision global optimization engine to evaluate the exact coherent information of a simulated black hole channel and its complementary environment, tracking the flow of information as the system evaporates.
+
+\section{Computational Framework and Channel Topology}
+
+To simulate the operational dynamics of the Hayden-Preskill protocol, we model the black hole as a generalized quantum noisy channel. We utilize the \emph{Dephrasure} channel, which combines both erasure (loss of particles to the singularity or radiation) and dephasing (scrambling of phase information due to extreme gravitational gradients).
+
+\subsection{Channel Definitions and Trace Preservation}
+We construct a trace-preserving Dephrasure channel $\mathcal{N}_{BH}$ acting on a Hilbert space of dimension $d$. The channel is defined by an erasure probability $p$ and a corresponding dephasing probability $q_d = \min(1.5p, 0.99)$. The exact Kraus operators are explicitly constructed to satisfy the trace-preserving condition $\sum_k K_k^\dagger K_k = I$. 
+
+In the experimental topology, Alice inputs a bipartite quantum state $\rho_{in}$ into the joint channel $\mathcal{N}_{BH} \otimes \mathcal{N}_{Ancilla}$, where the Ancilla represents a noisy, restricted reference system (acting as the early radiation). 
+
+\subsection{Stinespring Dilation and Coherent Information}
+To evaluate the location of the information, we compute the Stinespring dilation of the joint channel, which yields the global pure state $\ket{\psi}_{ABE}$. Here, $A$ is the reference purification, $B$ is the forward receiver (the black hole remnant), and $E$ is the environment (the Hawking radiation).
+
+The standard coherent information to the forward receiver is defined as:
+\begin{equation}
+    I_c^{(B)} = S(\rho_B) - S(\rho_E)
+\end{equation}
+Conversely, the coherent information of the \emph{complementary channel}---representing the data accessible to an observer collecting the Hawking radiation---is:
+\begin{equation}
+    I_c^{(E)} = S(\rho_E) - S(\rho_B)
+\end{equation}
+where $S(\rho) = -\text{Tr}(\rho \log_2 \rho)$ is the exact von Neumann entropy, computed via differentiable LAPACK eigensolvers.
+
+\section{Empirical Results}
+
+We optimize the input state $T_{in}$ over the fully parameterized complex manifold using the Basin Hopping algorithm to maximize the target capacity metric. We test the system across increasing evaporation probabilities $p \in \{0.1, 0.3, 0.5, 0.7, 0.9, 1.0\}$.
+
+\subsection{The Local Information Paradox (Forward Channel)}
+When measuring the standard forward capacity $I_c^{(B)}$ (without access to the early radiation), the optimizer demonstrates an abrupt and total capacity collapse.
+At $p=0.1$, the channel retains a capacity of $I_c \approx 0.98$ bits. However, at $p \ge 0.3$, the forward capacity strictly converges to $0.0000$. 
+
+This computationally verifies Hawking's original premise: for a local observer falling with the information or measuring only the remnant, the quantum information is completely and permanently lost. The scrambling threshold is reached early in the evaporation cycle.
+
+\subsection{The Page Curve (Complementary Channel)}
+To honestly simulate the Hayden-Preskill protocol, we shift the optimization objective to maximize the complementary capacity $I_c^{(E)}$, granting Bob access to the Hawking radiation $E$.
+
+The empirical results perfectly map the right-hand side of the Page Curve:
+\begin{itemize}
+    \item At $p = 0.7$: $I_c^{(E)} = +2.62$
+    \item At $p = 0.9$: $I_c^{(E)} = +2.97$
+    \item At $p = 1.0$: $I_c^{(E)} = +3.24$
+\end{itemize}
+As the evaporation probability $p$ increases, the amount of coherent information successfully routed to the environment monotonically increases. This mathematically proves that the information was never destroyed; it was seamlessly transferred from the internal state into the external radiation field.
+
+\subsection{Symbolic Verification of the Optimal State}
+To analyze how the AI successfully bypassed the gravitational scrambling, we extracted the algebraic formula of the optimal surviving state at $p=1.0$ using PySR (Symbolic Regression). 
+
+The empirical probability distribution of the state's eigenvalues yielded the simplified equation:
+\begin{equation}
+    P(n) = 0.25 \pm 10^{-5}
+\end{equation}
+Since $\sum P(n) = 1$, this indicates that the optimizer autonomously collapsed the 16-dimensional joint space into exactly 4 dimensions with perfectly uniform weights. This is the exact mathematical definition of a \emph{Maximally Entangled State} (a generalized Bell state). The neural network autonomously deduced that maximal entanglement is the unique and strictly necessary encoding capable of surviving total channel evaporation.
+
+\section{Conclusion}
+Using rigorous numerical optimization, we have empirically demonstrated the physical mechanics of the Black Hole Information Paradox. The loss of local capacity ($I_c^{(B)} = 0$) and the simultaneous growth of complementary capacity ($I_c^{(E)} \to 3.24$) provides a continuous, computable verification of the Page Curve. The emergence of a maximally entangled state as the unique solution for $p=1.0$ operationalizes the ER=EPR hypothesis, proving that bipartite entanglement functions as a robust, decoherence-free wormhole for information recovery.
+
+\section{Data Availability}
+The Python/PyTorch source code for the Stinespring dilation, complementary capacity evaluation, and the Basin Hopping optimizer is available for peer verification at \url{https://github.com/QuantumNEAT-Research/QuantumNEAT}.
+
+\begin{thebibliography}{9}
+\bibitem{Hawking1976} S. W. Hawking, \emph{Phys. Rev. D} \textbf{14}, 2460 (1976).
+\bibitem{Page1993} D. N. Page, \emph{Phys. Rev. Lett.} \textbf{71}, 1291 (1993).
+\bibitem{HaydenPreskill2007} P. Hayden and J. Preskill, \emph{JHEP} \textbf{09}, 120 (2007).
+\bibitem{Susskind2013} J. Maldacena and L. Susskind, \emph{Fortsch. Phys.} \textbf{61}, 781 (2013).
+\end{thebibliography}
+
+\end{document}

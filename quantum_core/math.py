@@ -71,6 +71,26 @@ def evaluate_stinespring_capacity(Ks: torch.Tensor, T_in: torch.Tensor) -> torch
     S_E = von_neumann_entropy(rho_E)
     return S_B - S_E
 
+def evaluate_complementary_capacity(Ks: torch.Tensor, T_in: torch.Tensor) -> torch.Tensor:
+    """
+    Differentiable evaluation of Complementary Quantum Capacity I_c(Env) = S(E) - S(B).
+    """
+    num_k, d_out, d_in = Ks.shape
+    dim_in_state = T_in.shape[1]
+    
+    W_tensor = torch.einsum('kij, jr -> kir', Ks, T_in)
+    
+    # Correct computation of rho_B: Trace out E (k) and R (r)
+    rho_B = torch.einsum('kir, kjr -> ij', W_tensor, W_tensor.conj())
+    
+    # Correct computation of rho_E: Trace out B (i) and R (r)
+    W_E = W_tensor.reshape(num_k, d_out * dim_in_state)
+    rho_E = W_E @ W_E.conj().T
+    
+    S_B = von_neumann_entropy(rho_B)
+    S_E = von_neumann_entropy(rho_E)
+    return S_E - S_B
+
 def evaluate_npt_penalty(Ks: torch.Tensor, d_out: int, d_in: int) -> torch.Tensor:
     """
     Computes the PPT penalty for a set of Kraus operators.
