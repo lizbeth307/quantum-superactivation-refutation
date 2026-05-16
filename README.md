@@ -1,5 +1,5 @@
 # ⚛️ QuantumNEAT & QuantumOS
-> **Computational Refutations in Quantum Information & Gravitational Simulations**
+> **Computational Refutation of Quantum Superactivation via Bound Entanglement**
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20189708.svg)](https://doi.org/10.5281/zenodo.20189708)
 
@@ -62,7 +62,7 @@ python 01_Superactivation_Refutation/sa_full_PA_cq.py
 ```bibtex
 @misc{murai_2026_20189708,
   author       = {Murai, Yaroslav},
-  title        = {Computational Refutation of Quantum Superactivation and the Emergence of Cosmological Fractal Symmetry},
+  title        = {Computational Refutation of Quantum Superactivation via Bound Entanglement},
   month        = may,
   year         = 2026,
   publisher    = {Zenodo},
